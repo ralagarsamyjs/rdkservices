@@ -79,6 +79,10 @@ if(PLUGIN_USERSETTINGS)
     add_subdirectory(UserSettings)
 endif()
 
+if(PLUGIN_MIGRATIONPREPARER)
+	add_subdirectory(MigrationPreparer)
+endif()
+
 if(PLUGIN_VOICECONTROL)
     add_subdirectory(VoiceControl)
 endif()
