@@ -50,7 +50,7 @@ namespace Plugin {
         virtual uint32_t Register(Exchange::IMigrationPreparer::INotification *notification ) override ;
         virtual uint32_t Unregister(Exchange::IMigrationPreparer::INotification *notification ) override ;
 
-        uint32_t Write(const string& name, string &value) override;
+        uint32_t Write(const string& name, const string &value) override;
         uint32_t Read(const string& name, string &value)  override;
         uint32_t Delete(const string& name)  override;
 

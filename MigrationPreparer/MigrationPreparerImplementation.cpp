@@ -94,7 +94,7 @@ namespace Plugin {
          _adminLock.Unlock();         
     }
 
-    uint32_t MigrationPreparerImplementation::Write(const string& name, string &value) const
+    uint32_t MigrationPreparerImplementation::Write(const string& name, const string &value) const
     {
         uint32_t status = Core::ERROR_GENERAL;
         _adminLock.Lock();
