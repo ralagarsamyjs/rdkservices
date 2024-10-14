@@ -142,7 +142,7 @@ namespace Plugin {
         return status;
     }
 
-    uint32_t MigrationPreparerImplementation::reset(const ResetType type)
+    uint32_t MigrationPreparerImplementation::reset(const string& type)
     {
         uint32_t status = Core::ERROR_GENERAL;
         _adminLock.Lock();

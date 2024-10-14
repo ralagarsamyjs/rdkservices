@@ -32,35 +32,7 @@ namespace Plugin {
 
     public:
         static const std::map<string, uint32_t> migrationPreparerMap;
-
-    private:
-        class DataStore2Notification : public Exchange::IMigrationPreparer::INotification {
-        private:
-            DataStore2Notification(const DataStore2Notification&) = delete;
-            DataStore2Notification& operator=(const DataStore2Notification&) = delete;
-
-        public:
-            explicit DataStore2Notification(MigrationPreparerImplementation& parent)
-                : _parent(parent)
-            {
-            }
-            ~DataStore2Notification() override = default;
-
-        public:
-            void ValueChanged(const string& key, const string& value) override
-            {
-                _parent.ValueChanged(key, value);
-            }
-
-            BEGIN_INTERFACE_MAP(DataStore2Notification)
-            INTERFACE_ENTRY(Exchange::IMigrationPreparer::INotification)
-            END_INTERFACE_MAP
-
-        private:
-            MigrationPreparerImplementation& _parent;
-        };       
-
-    public:
+     
         // We do not allow this plugin to be copied !!
         MigrationPreparerImplementation();
         ~MigrationPreparerImplementation() override;
@@ -86,7 +58,7 @@ namespace Plugin {
 
         uint32_t setComponentReadiness(const string& compName) override;
         uint32_t getComponentReadiness(RPC::IStringIterator*& compList) override;
-        uint32_t reset(const ResetType type) override;
+        uint32_t reset(const string& type) override;
 
         BEGIN_INTERFACE_MAP(MigrationPreparerImplementation)
         INTERFACE_ENTRY(Exchange::IMigrationPreparer)

@@ -28,7 +28,7 @@ namespace Plugin {
     {
         Register<WriteParamsInfo, WriteResultInfo>(_T("write"), &MigrationPreparer::endpoint_write, this);
         Register<ReadParamsInfo, ReadResultData>(_T("read"), &MigrationPreparer::endpoint_read, this);
-        Register<DeleteKeyParamsInfo, DeleteKeyResultInfo>(_T("delete"), &MigrationPreparer::endpoint_delete, this);
+        Register<DeleteParamsInfo, DeleteResultInfo>(_T("delete"), &MigrationPreparer::endpoint_delete, this);
         Register<void, GetComponentReadinessResultData>(_T("getComponentReadiness"), &MigrationPreparer::endpoint_getComponentReadiness, this);
         Register<SetComponentReadinessParamsData, void>(_T("setComponentReadiness"), &MigrationPreparer::endpoint_setComponentReadiness, this);
         Register<ResetParamsData, void>(_T("reset"), &MigrationPreparer::endpoint_reset, this);
@@ -70,7 +70,7 @@ namespace Plugin {
         return result;
     }
 
-    uint32_t MigrationPreparer::endpoint_delete(const DeleteKeyParamsInfo& params, DeleteKeyResultInfo& response)
+    uint32_t MigrationPreparer::endpoint_delete(const DeleteParamsInfo& params, DeleteResultInfo& response)
     {
         auto result = _migrationPreparer->DeleteKey(
                             params.name.Value());
@@ -110,9 +110,9 @@ namespace Plugin {
     }
 
 
-    uint32_t PersistentStore::endpoint_reset(ResetParamsData& response)
+    uint32_t PersistentStore::endpoint_reset(ResetParamsData& params, ResetResultData& response)
     {
-        auto result = _migrationPreparer->reset();
+        auto result = _migrationPreparer->reset(params.resetType.Value());
         if (result == Core::ERROR_NONE) {
             response.Success = true;
         }

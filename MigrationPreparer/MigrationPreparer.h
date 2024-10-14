@@ -68,6 +68,15 @@ namespace Plugin {
                    _parent.Deactivated(connection);
                 }
 
+                void ValueChanged(const string& name, const string& value) override
+                {
+                    JsonData::MigrationPreparer::WriteParamsInfo params;
+                    params.name = name;
+                    params.value = value;
+
+                    _parent.event_onValueChanged(params);
+                } 
+
             private:
                 MigrationPreparer& _parent;
         };
@@ -98,7 +107,7 @@ namespace Plugin {
 
             uint32_t endpoint_write(const JsonData::MigrationPreparer::WriteParamsInfo& params, JsonData::MigrationPreparer::WriteResultInfo& response);
             uint32_t endpoint_read(const JsonData::MigrationPreparer::ReadParamsInfo& params, JsonData::MigrationPreparer::ReadResultData& response);
-            uint32_t endpoint_delete(const JsonData::MigrationPreparer::DeleteKeyParamsInfo& params, JsonData::MigrationPreparer::DeleteKeyResultInfo& response);
+            uint32_t endpoint_delete(const JsonData::MigrationPreparer::DeleteParamsInfo& params, JsonData::MigrationPreparer::DeleteResultInfo& response);
             uint32_t endpoint_reset(JsonData::MigrationPreparer::ResetParamsData& response);
             uint32_t endpoint_getComponentReadiness(JsonData::MigrationPreparer::GetComponentReadinessResultData& response);
             uint32_t endpoint_setComponentReadiness(const JsonData::MigrationPreparer::SetComponentReadinessParamsData& params);
